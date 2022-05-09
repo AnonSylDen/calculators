@@ -1,0 +1,97 @@
+<div>
+<tr>
+<td><center><h2><FONT face="Verdana" >Calculation of the parameters of the Mekanika CNC</h2></center></td>
+</tr>
+</table>
+</div>
+
+
+<p align="center"><img src="sheets.jpg" alt="Vitesse de coupe - VC" width=50%/></p>
+
+<table border=0 width=100% >
+<tr height=50><td colspan=2></td></tr>
+<tr>
+<td width=50%>
+<p align=right>
+	<B>VC : <input type="number" id="VC"> &nbsp; &nbsp; m/min</B>
+</p>
+</td>
+<td >
+<p align=left>
+	<B>&nbsp; &nbsp;&nbsp; &nbsp;D : <input type="number" id="D"> mm</B>
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p align=right>
+	<B>FZ : <input type="number" id="FZ"> mm/tooth</B>
+</p>
+</td>
+<td>
+<div class="ligne">
+	<B>&nbsp; &nbsp;&nbsp; &nbsp;Z : <input type="number" id="Z"> nb tooth</B>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan=2>
+<div class="ligne">
+	<p align=center><button type="button" id="calcul">Calculate</button></p>
+</td>
+</tr>
+</table>
+
+
+<table border=0 width=100%>
+<tr height=30><td colspan=2></td></tr>
+<tr>
+<td width=50%>
+	<p align=right><font color=red><B>n max : <output type="number" id="n" ></B></font></p>
+<td>	
+	<p align=left><font color=red><B>tr/min</B></font></p>
+</td>
+</tr>
+<tr>
+<td>
+	<p align=right><font color=red><B>Vf max : &nbsp;&nbsp;<output type="number" id="Vf"> </B></font></p>
+</td>
+<td>
+	<p align=left><font color=red><B>mm/min </B></font></p>
+</td>	
+</tr>
+<tr>
+<td>
+	<p align=right><font color=red><B>Vf max : &nbsp;&nbsp;<output type="number" id="Vfsec"> </B></font></p>
+</td>
+<td>
+	<p align=left><font color=red><B>mm/sec </B></font></p>
+</td>	
+</tr>
+</div>
+
+
+
+</table>
+
+<center>
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+</center>
+
+
+<script>
+document.getElementById('calcul').onclick = function () {
+	VC = document.getElementById('VC').value;
+	D = document.getElementById('D').value;
+	n = (Math.round((1000 * parseFloat(VC)) / (3.14 * parseFloat(D))));
+	document.getElementById('n').value = n;
+	v5 = document.getElementById('n').value;
+	FZ = document.getElementById('FZ').value;
+	Z = document.getElementById('Z').value;
+	Vf = (Math.round((Math.round(v5)* parseFloat(FZ)* parseFloat(Z))));
+	document.getElementById('Vf').value = Vf;
+	Vfsec = (Math.round(Vf / 60));
+	document.getElementById('Vfsec').value = Vfsec;
+	};
+</script>

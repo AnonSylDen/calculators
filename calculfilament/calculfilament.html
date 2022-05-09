@@ -1,0 +1,125 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+
+
+<head>
+<title>Length of filaments</title>
+<meta name="description" content="Correspondence between spool weight and filament length for 3D printer" />
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+</head>
+<body>
+
+
+
+<h2 style="text-align: justify;">Weight / length converter for wire spools</h2>
+<p style="text-align: justify;">This conversion tool allows you to know the length of the filament in relation to a given mass, and vice versa.</p>
+<p style="text-align: justify;">Select the material from the drop-down list.</p>
+<p style="text-align: justify;">If the density does not match your material, you can change it if necessary.</p>
+<form>
+<table border="0">
+<tbody>
+<tr>
+<td>
+<p>Material :</p>
+</td>
+<td><select id="matiere" name="matiere" size="1" onchange="putdensite();"> <option value="PLA">PLA</option> <option value="ABS">ABS</option> <option value="PVA">PVA</option> <option value="PET">PET</option> <option value="HIPS">HIPS</option> <option value="Flexible">Flexible</option> <option value="PC">PC</option> <option value="Nylon">Nylon</option><option value="LayWoo">LayWoo</option> </select></td>
+<td>
+<p>Diameter :</p>
+</td>
+<td><select id="diametre" name="diametre" size="1" onchange="putdensite();"> <option value="1.75">1.75mm</option> <option value="2.85">2.85mm</option> <option value="3">3mm</option> </select></td>
+<td>density (g/cm<sup>3</sup>)<input id="densite" onkeyup="calculdens();" type="text" name="densite" value="1.25" /></td>
+</tr>
+</tbody>
+</table>
+<br />Enter a length of yarn in cm or a mass in grams. The data is calculated automatically.<br /> length (m) : <input id="longueur" onkeyup="calculpoids();" type="text" name="longueur" /> weight (g) : <input id="poids" onkeyup="calcullongueur();" type="text" name="poids" />
+<script type="text/javascript">// <![CDATA[
+var dPLA = 1.25;
+var dABS = 1.01;
+var dPET = 1.26;
+var dHIPS = 0.98;
+var dFlexible = 1.14;
+var dPVA = 1.29;
+var dPC = 1.21;
+var dNylon = 1.14;
+var dLayWoo = 1.06;
+function putdensite(){
+var index = document.getElementById("matiere").value;
+var co = "d"+index;
+document.getElementById('densite').value = eval(co);
+document.getElementById('longueur').value = 0;
+}
+function calcullongueur(){
+document.getElementById('longueur').value = 
+(document.getElementById('poids').value / 
+((Math.PI *document.getElementById('diametre').value / 20*document.getElementById('diametre').value / 20) * 
+document.getElementById('densite').value) / 100) .toFixed(1);
+}
+function calculpoids(){
+document.getElementById('poids').value = 
+((Math.PI *(document.getElementById('diametre').value / 20*document.getElementById('diametre').value / 20) *
+document.getElementById('longueur').value) * 100 * 
+document.getElementById('densite').value). toFixed(0);
+}
+function calculdens(){
+if(document.getElementById('poids').value != 0)
+document.getElementById('poids').value = ((Math.PI *(document.getElementById('diametre').value / 20*document.getElementById('diametre').value / 20)*document.getElementById('longueur').value)*document.getElementById('densite').value).toFixed(2);
+else if (document.getElementById('longueur').value != 0)
+document.getElementById('longueur').value = (document.getElementById('poids').value/((Math.PI *document.getElementById('diametre').value / 20*document.getElementById('diametre').value / 20) *document.getElementById('densite').value)).toFixed(2);
+}
+function putdensite_2(){
+var index = document.getElementById("matiere_2").value;
+var co = "d"+index;
+document.getElementById('densite_2').value = eval(co);
+document.getElementById('longueur_2').value =0;
+}
+function calcullongueur_2(){
+var massefil = eval(document.getElementById('massetotale_2').value -
+document.getElementById('bobine_2').value);
+document.getElementById('longueur_2').innerHTML = (massefil / 
+((Math.PI * document.getElementById('diametre_2').value / 20 * 
+document.getElementById('diametre_2').value / 20) * 
+document.getElementById('densite_2').value) / 100) .toFixed(1);
+if (document.getElementById('longueur_2').innerHTML < 0){
+document.getElementById('longueur_2').innerHTML = 0;
+}
+}
+// ]]></script>
+</form><form></form><form>
+<h2>How much filament is left on the spool?</h2>
+</form><form></form><form>You need 12 meters for your next print, your spool has started and you don't know if you will have enough filament?</form><form>Select the material and the diameter. Weigh your spool and the program will show you the number of meters left.</form><form></form><form>You can customise the density of the material and the mass of your spool alone.</form><form></form><form>
+<table border="0">
+<tbody>
+<tr>
+<td>
+<p>Material :</p>
+</td>
+<td><select id="matiere_2" name="matiere_2" size="1" onchange="putdensite_2(); calcullongueur_2();"> <option value="PLA">PLA</option> <option value="ABS">ABS</option> <option value="PVA">PVA</option> <option value="PET">PET</option> <option value="HIPS">HIPS</option> <option value="Flexible">Flexible</option> <option value="PC">PC</option> <option value="Nylon">Nylon</option><option value="LayWoo">LayWoo</option></select></td>
+<td>
+<p>Diameter :</p>
+</td>
+<td><select id="diametre_2" name="diametre_2" size="1" onchange="putdensite_2(); calcullongueur_2();"> <option value="1.75">1.75mm</option> <option value="2.85">2.85mm</option> <option value="3">3mm</option> </select></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td>Density (g/cm<sup>3</sup>) :</td>
+<td><input id="densite_2" onkeyup="calcullongueur_2();" type="text" name="densite_2" value="1.25" /></td>
+</tr>
+<tr>
+<td>
+<p>Mass of the empty spool alone (g) :</p>
+</td>
+<td><input id="bobine_2" onkeyup="calcullongueur_2();" type="text" name="bobine_2" value="245" /></td>
+<td>
+<p>Spool with wire (g):</p>
+</td>
+<td><input id="massetotale_2" onkeyup="calcullongueur_2();" type="text" name="massetotale_2" /></td>
+</tr>
+</tbody>
+</table>
+<p style="display: inline;">Lenght (m):</p>
+<p id="longueur_2" style="display: inline; color: red;"> </p>
+</form>
+<p style="text-align: justify;"> </p>
+
+</html>
